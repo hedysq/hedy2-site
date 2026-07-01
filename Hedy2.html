@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hedy&#178; &middot; Audience intelligence</title>
+<meta name="description" content="Hedy&#178; pulls strategy from real community conversations: signal, not synthetic guesses.">
+<meta property="og:title" content="Hedy&#178; &middot; Audience intelligence">
+<meta property="og:description" content="Your market is already saying what it wants. Hedy&#178; reads real community conversations and pulls the signal out as strategy you can act on.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hedy2.com">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --surface:#FFFFFF;
+    --surface-2:#F3F4F0;
+    --grid:rgba(21,23,18,.07);
+    --line:rgba(21,23,18,.15);
+    --line-soft:rgba(21,23,18,.10);
+    --ink:#15171A;
+    --mist:#555B59;
+    --mist-dim:#979D97;
+    --signal:#5E8F63;
+    --signal-deep:#4A7450;
+    --signal-dim:rgba(94,143,99,.12);
+    --shadow:0 1px 2px rgba(21,23,18,.04),0 26px 54px -34px rgba(21,23,18,.5);
+    --sans:'IBM Plex Sans',-apple-system,system-ui,sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',ui-monospace,monospace;
+    --maxw:1060px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;background:var(--paper)}
+  body{
+    color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.5;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                     linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:40px 40px;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  ::selection{background:var(--signal-deep);color:#fff}
+  :focus-visible{outline:2px solid var(--signal-deep);outline-offset:3px;border-radius:2px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,40px);position:relative;z-index:1}
+
+  /* the white sheet every block sits on */
+  .panel{background:var(--surface);border:1px solid var(--line-soft);border-radius:16px;
+          box-shadow:var(--shadow);padding:clamp(28px,4.4vw,58px)}
+
+  .ey{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--signal-deep)}
+  .ey.muted{color:var(--mist-dim)}
+
+  /* ── NAV ── */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      background:rgba(255,255,255,.8);border-bottom:1px solid var(--line-soft)}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:16px clamp(16px,4vw,40px);
+          display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:700;font-size:19px;letter-spacing:-.02em;display:inline-flex;align-items:baseline;gap:1px}
+  .brand sup{font-size:11px;color:var(--signal);font-weight:600;top:-.4em;position:relative}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--mist);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.nav-cta{color:#fff;background:var(--signal-deep);border:1px solid var(--signal-deep);
+           padding:8px 15px;border-radius:3px;transition:transform .2s,box-shadow .2s;
+           display:inline-flex;align-items:center;gap:7px}
+  .nav-links a.nav-cta:hover{color:#fff;transform:translateY(-1px);box-shadow:0 8px 20px -10px rgba(74,116,80,.7)}
+  .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;transition:transform .25s}
+  .nav-cta:hover svg{transform:translateX(3px)}
+  @media(max-width:720px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ── SECTION SPACING (grid shows in these gaps) ── */
+  .hero{padding:clamp(32px,4.5vw,60px) 0 clamp(20px,3vw,34px)}
+  section.block{padding:clamp(20px,3vw,34px) 0}
+
+  /* ── HERO ── */
+  .hero .ey{display:block;margin-bottom:26px}
+  .hero h1{font-weight:600;font-size:clamp(36px,6vw,72px);line-height:1.02;letter-spacing:-.035em;max-width:14ch}
+  .hero h1 em{font-style:normal;color:var(--mist-dim);display:block}
+  .hero h1 .lit{color:var(--ink)}
+  .lede{margin-top:28px;max-width:50ch;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:var(--mist)}
+  .hero-actions{margin-top:36px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .btn-primary{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:#fff;
+               background:var(--signal-deep);padding:13px 22px;border-radius:3px;
+               display:inline-flex;align-items:center;gap:9px;transition:transform .2s,box-shadow .2s}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 30px -12px rgba(74,116,80,.7)}
+  .btn-primary svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;transition:transform .25s}
+  .btn-primary:hover svg{transform:translateX(3px)}
+  .btn-ghost{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--mist);padding:13px 6px;transition:color .2s}
+  .btn-ghost:hover{color:var(--ink)}
+
+  .hero-thesis{margin-top:22px;font-weight:600;font-size:clamp(15px,1.8vw,21px);
+               letter-spacing:-.03em;line-height:1.3;max-width:none}
+  .hero-thesis span{color:var(--signal-deep)}
+
+  /* ── SIGNATURE: signal trace ── */
+  .scope{margin-top:clamp(18px,2.4vw,30px);position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .scope-labels{display:flex;justify-content:space-between;font-family:var(--mono);
+                font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim);padding:14px 2px}
+  .scope-labels .on{color:var(--signal-deep)}
+  .scope svg{display:block;width:100%;height:clamp(110px,15vw,170px)}
+  .noise-path{stroke:var(--mist-dim);stroke-width:1;fill:none;opacity:.65}
+  .signal-path{stroke:var(--signal);stroke-width:2;fill:none}
+
+  /* ── HEADS ── */
+  .head{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-bottom:clamp(32px,4vw,50px)}
+  .head h2{font-weight:600;font-size:clamp(25px,3.4vw,42px);line-height:1.06;letter-spacing:-.03em;max-width:18ch}
+  .head p{color:var(--mist);max-width:52ch;font-size:15px;line-height:1.6}
+
+  /* ── COMPARE (split inside the sheet) ── */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+           border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  @media(max-width:620px){.compare{grid-template-columns:1fr}}
+  .cell{background:var(--surface);padding:clamp(24px,3vw,36px)}
+  .cell.them{background:var(--surface-2)}
+  .cell .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+             display:flex;align-items:center;gap:8px;margin-bottom:18px}
+  .cell.them .tag{color:var(--mist-dim)}
+  .cell.us .tag{color:var(--signal-deep)}
+  .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+  .cell.them .dot{background:var(--mist-dim)}
+  .cell.us .dot{background:var(--signal);box-shadow:0 0 0 4px var(--signal-dim)}
+  .cell h3{font-weight:600;font-size:clamp(18px,1.7vw,22px);letter-spacing:-.02em;line-height:1.2;margin-bottom:13px}
+  .cell.them h3{color:var(--mist)}
+  .cell p{color:var(--mist);font-size:14.5px;line-height:1.6}
+  .cell.them p{color:var(--mist-dim)}
+
+  /* ── PROCESS ── */
+  .steps{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,4vw,52px);
+        padding:clamp(20px,2.6vw,28px) 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .step:last-child{border-bottom:0;padding-bottom:0}
+  .step .num{font-family:var(--mono);font-size:13px;color:var(--signal-deep);letter-spacing:.1em}
+  .step .body{display:grid;grid-template-columns:minmax(120px,200px) 1fr;gap:clamp(14px,3vw,40px);align-items:baseline}
+  @media(max-width:600px){.step .body{grid-template-columns:1fr;gap:8px}}
+  .step h3{font-weight:600;font-size:clamp(17px,1.7vw,21px);letter-spacing:-.02em}
+  .step p{color:var(--mist);font-size:14.5px;line-height:1.6;max-width:48ch}
+
+  /* ── SAMPLE (excerpt block inside the sheet) ── */
+  .sample{border:1px solid var(--line);border-radius:10px;
+          padding:clamp(24px,3.2vw,40px);max-width:660px}
+  .sample .meta{display:flex;justify-content:space-between;align-items:baseline;
+                font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+                color:var(--mist-dim);padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid var(--line-soft)}
+  .sample .meta .on{color:var(--signal-deep)}
+  .sample .row{margin-bottom:22px}
+  .sample .row:last-child{margin-bottom:0}
+  .sample .label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist-dim);margin-bottom:7px}
+  .sample .row p{color:var(--ink);font-size:15.5px;line-height:1.55}
+  .quote{border-left:2px solid var(--signal);padding:4px 0 4px 16px;margin:14px 0;color:var(--mist);font-size:14.5px;line-height:1.55}
+  .quote-src{display:block;margin-top:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal-deep)}
+  .demo-note{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--mist-dim);margin-top:10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{font-family:var(--mono);font-size:12px;color:var(--signal-deep);
+        background:var(--signal-dim);border:1px solid rgba(94,143,99,.3);padding:5px 11px;border-radius:3px}
+  .chip.no{color:var(--mist-dim);background:#fff;border-color:var(--line);
+           text-decoration:line-through;text-decoration-color:var(--mist-dim)}
+
+  /* ── CONTACT ── */
+  .contact-panel{text-align:left}
+  .contact-panel h2{font-weight:600;font-size:clamp(26px,3.8vw,46px);letter-spacing:-.035em;line-height:1.05;max-width:16ch}
+  .contact-panel p{color:var(--mist);margin-top:18px;margin-bottom:32px;font-size:16px;max-width:46ch}
+
+  footer{padding:36px 0 48px}
+  .foot-in{max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,40px);
+           display:flex;justify-content:space-between;align-items:center;
+           font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--mist-dim)}
+
+  .rise{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+  .rise.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="brand" aria-label="Hedy squared">Hedy<sup>2</sup></a>
+    <div class="nav-links">
+      <a href="#diff">Why Hedy&#178;</a>
+      <a href="#process">How it works</a>
+      <a href="#sample">Output</a>
+      <a href="#contact" class="nav-cta">Get in touch
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="panel rise in">
+        <span class="ey">Audience intelligence</span>
+        <h1><span class="lit">The signal</span> <em>was always there.</em></h1>
+        <p class="lede">Your market is already saying what it wants, in the communities where it talks honestly. Hedy&#178; reads those real conversations and pulls the signal out as strategy you can act on.</p>
+        <div class="scope" aria-hidden="true">
+          <div class="scope-labels">
+            <span>Noise &middot; synthetic guesses</span>
+            <span class="on">Signal &middot; grounded</span>
+          </div>
+          <svg id="scope" viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <path class="noise-path" id="noise" d=""></path>
+            <path class="signal-path" id="signal" d=""></path>
+          </svg>
+        </div>
+        <p class="hero-thesis">No best practice. <span>The next move</span>, specific enough to act on today.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="block" id="diff">
+    <div class="wrap">
+      <div class="panel rise">
+        <div class="head">
+          <span class="ey muted">01 &middot; The difference</span>
+          <h2>Grounded signal. Not generated guesses.</h2>
+          <p>Most AI audience tools model the customers you already have, then ask a language model to imagine the rest. It sounds plausible and confirms what you assumed. Hedy&#178; starts from what real people actually said.</p>
+        </div>
+        <div class="compare">
+          <div class="cell them">
+            <span class="tag"><span class="dot"></span>Typical AI tools</span>
+            <h3>Synthetic in, synthetic out</h3>
+            <p>Built from your existing list. A model imagines what a customer "would" think, in language no customer used. It reflects who already bought, not the market you haven't reached.</p>
+          </div>
+          <div class="cell us">
+            <span class="tag"><span class="dot"></span>Hedy&#178;</span>
+            <h3>Real people, real language</h3>
+            <p>Sourced from thousands of unfiltered community conversations, then read through behavioral science. Messaging comes from how your audience actually talks, including the customers outside your list.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="process">
+    <div class="wrap">
+      <div class="panel rise">
+        <div class="head">
+          <span class="ey muted">02 &middot; How it works</span>
+          <h2>Four steps from raw conversation to a decision.</h2>
+          <p>A sequence, not a black box. Each step distills raw conversation into something specific enough to act on.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="num">01</span><div class="body"><h3>Signal</h3>
+            <p>Real conversations, decoded through behavioral science, distilled into a Move: audience portrait, messaging territories, creative direction.</p></div></div>
+          <div class="step"><span class="num">02</span><div class="body"><h3>Audit</h3>
+            <p>Your existing creative, measured against the signal. What fits, what doesn't, what to change, and why.</p></div></div>
+          <div class="step"><span class="num">03</span><div class="body"><h3>Pre-flight</h3>
+            <p>New creative, checked against real signal before you spend on production or media. Refine fast, launch grounded.</p></div></div>
+          <div class="step"><span class="num">04</span><div class="body"><h3>Re-read</h3>
+            <p>Markets move. The signal gets re-read as the conversation shifts, so the strategy stays current instead of going stale.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="sample">
+    <div class="wrap">
+      <div class="panel rise">
+        <div class="head">
+          <span class="ey muted">03 &middot; Sample output</span>
+          <h2>This is what a decision looks like.</h2>
+          <p>One slice of a Hedy&#178; Move for a DTC coffee roaster. The full Move runs deeper; this is the shape of it.</p>
+          <p class="demo-note">Daybreak is a demonstration brand. The community data &mdash; and every quote &mdash; is real.</p>
+        </div>
+        <div class="sample">
+          <div class="meta"><span class="on">Signal &middot; messaging territory</span><span>Daybreak Coffee Co.</span></div>
+          <div class="row">
+            <p class="label" style="margin-bottom:9px">Territory: "Roasted this week"</p>
+            <p>Freshness as a moral commitment, not a marketing claim. The bag that ships Thursday was beans on Monday.</p>
+          </div>
+          <div class="quote">"I check the roast date before I check the price. If it's not on the bag, I assume it's old."
+            <span class="quote-src">Verbatim &middot; real community member</span></div>
+          <div class="row"><p class="label">Language to use</p>
+            <div class="chips"><span class="chip">Roasted this week</span><span class="chip">Shipped within 48 hours</span><span class="chip">Roast date on every bag</span></div></div>
+          <div class="row"><p class="label">Language to avoid</p>
+            <div class="chips"><span class="chip no">Artisanal</span><span class="chip no">Small-batch</span><span class="chip no">We miss you, here's 25% off</span></div></div>
+          <div class="row"><p class="label">Why the data supports it</p>
+            <p style="color:var(--mist);font-size:14.5px;line-height:1.6">The community treats roast date as the real freshness signal, not words like "artisanal" or "small-batch," which read as marketing noise. Naming the date and shipping window is the one claim they can't dismiss as spin.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="wrap">
+      <div class="panel rise contact-panel">
+        <span class="ey muted">04 &middot; Get in touch</span>
+        <h2 style="margin-top:14px">Tell us your category. We'll show you what the signal looks like.</h2>
+        <p>Send a line about your business or your client's. We'll come back with what the real conversation in that market is already saying &mdash; and what we'd do with it.</p>
+        <a href="mailto:tbyl@hedy2.com" class="btn-primary">Get in touch
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-in"><span>Hedy&#178; &middot; audience intelligence</span><span>Signal beneath the surface</span></div>
+</footer>
+
+<script>
+  (function(){
+    var W=1000,H=200,mid=H/2,step=4;
+    var noiseEl=document.getElementById('noise');
+    var sigEl=document.getElementById('signal');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function clean(t,phase){var d='';for(var x=0;x<=W;x+=step){var amp=30;
+      var y=mid+Math.sin((x/W)*Math.PI*6+phase)*amp*Math.min(1,t*1.4);
+      d+=(x===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1)+' ';}return d;}
+    function noisy(){var d='';for(var x=0;x<=W;x+=step){var k=x/W;
+      var n=(Math.random()-0.5)*(52*(1-k)+6);var base=Math.sin((x/W)*Math.PI*6)*6;
+      var y=mid+base+n;d+=(x===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1)+' ';}return d;}
+    if(reduce){noiseEl.setAttribute('d',noisy());sigEl.setAttribute('d',clean(1,0));return;}
+    var start=null,phase=0,lastNoise=0;
+    function frame(ts){if(!start)start=ts;var t=Math.min(1,(ts-start)/1400);phase+=0.012;
+      sigEl.setAttribute('d',clean(t,phase));
+      if(ts-lastNoise>90){noiseEl.setAttribute('d',noisy());lastNoise=ts;}
+      requestAnimationFrame(frame);}
+    requestAnimationFrame(frame);
+  })();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.rise').forEach(function(el){io.observe(el);});
+</script>
+
+</body>
+</html>
